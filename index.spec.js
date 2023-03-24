@@ -40,4 +40,34 @@ describe('Linked List', () => {
     expect(list.head.value).toBe('a');
     expect(list.tail.value).toBe('a');
   });
+
+  test('Delete head', () => {
+    let list = init();
+    expect(list.delete(0).toString()).toBe('a');
+    expect(list.toString()).toBe('b,c,d');
+    expect(list.head.value).toBe('b');
+    expect(list.tail.value).toBe('d');
+  });
+
+  test('Delete tail', () => {
+    let list = init();
+    expect(list.delete(3).toString()).toBe('d');
+    expect(list.toString()).toBe('a,b,c');
+    expect(list.head.value).toBe('a');
+    expect(list.tail.value).toBe('c');
+  });
+
+  test('Delete middle', () => {
+    let list = init();
+    expect(list.delete(1).toString()).toBe('b');
+    expect(list.toString()).toBe('a,c,d');
+    expect(list.head.value).toBe('a');
+    expect(list.tail.value).toBe('d');
+  });
+
+  test('Delete error', () => {
+    let list = init();
+    expect(list.delete(5)).toBe(null);
+    expect(list.delete(-5)).toBe(null);
+  });
 });
