@@ -12,7 +12,6 @@ class linkedListNode {
     return callback ? callback(this.value) : `${this.value}`;
   }
 }
-
 class LinkedList {
   constructor() {
     this.head = null;
@@ -137,16 +136,44 @@ class LinkedList {
     return deletedNode;
   }
 
+  reverse() {
+    let currNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currNode) {
+      nextNode = currNode.next;
+      prevNode = currNode.prev;
+      currNode.next = prevNode;
+      currNode.prev = nextNode;
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+
+    this.tail = this.head;
+    this.head = prevNode;
+
+    currNode = this.head;
+    let count = 0;
+    while (currNode) {
+      currNode.numb = count++;
+      currNode = currNode.next;
+    }
+    return this;
+  }
+
+  clear() {
+    this.head = null;
+    this.tail = null;
+  }
+
   toArray() {
     const nodes = [];
-
     let currentNode = this.head;
-
     while (currentNode) {
       nodes.push(currentNode);
       currentNode = currentNode.next;
     }
-
     return nodes;
   }
 
@@ -161,6 +188,8 @@ class LinkedList {
 // console.log(`length0 = ${list.length()}`);
 
 // list.append('a').append('b').append('c').append('d');
+// list.clear();
+
 // console.log(list.toArray());
 // console.log(list.toString());
 // list.delete('a');

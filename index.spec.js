@@ -105,19 +105,16 @@ describe('Linked List', () => {
     expect(list.deleteAll('f')).toBe(null);
     expect(list.deleteAll(-5)).toBe(null);
   });
-  // test('DeleteAll tail', () => {
-  //   let list = init();
-  //   expect(list.delete('d')).toBe('d');
-  //   expect(list.toString()).toBe('a,b,c');
-  //   expect(list.head.value).toBe('a');
-  //   expect(list.tail.value).toBe('c');
-  // });
 
-  // test('DeleteAll middle', () => {
-  //   let list = init();
-  //   expect(list.delete('b')).toBe('b');
-  //   expect(list.toString()).toBe('a,c,d');
-  //   expect(list.head.value).toBe('a');
-  //   expect(list.tail.value).toBe('d');
-  // });
+  test('Reverse', () => {
+    let list = init();
+    expect(list.reverse().toString()).toBe('d,c,b,a');
+  });
+
+  test('clear', () => {
+    let list = init();
+    list.clear();
+    expect(list.head).toBe(null);
+    expect(list.tail).toBe(null);
+  });
 });
