@@ -69,24 +69,25 @@ class LinkedList {
   }
 }
 
-const list = new LinkedList();
-console.log(`length0 = ${list.length()}`);
+// const list = new LinkedList();
+// console.log(`length0 = ${list.length()}`);
 
-list.append('a');
-console.log(`length1 = ${list.length()}`);
-console.log(list.head);
-console.log(list.tail, '\n');
+// list.append('a');
+// console.log(`length1 = ${list.length()}`);
+// console.log(list.head);
+// console.log(list.tail, '\n');
 
-list.append('b');
-console.log(`length1 = ${list.length()}`);
-console.log(list.head);
-console.log(list.tail, '\n');
+// list.append('b');
+// console.log(`length1 = ${list.length()}`);
+// console.log(list.head);
+// console.log(list.tail, '\n');
 
-list.append('c');
-console.log(`length1 = ${list.length()}`);
-console.log(list.head);
-console.log('!!!', list.tail.prev);
+// list.append('c');
+// console.log(`length1 = ${list.length()}`);
+// console.log(list.head);
+// console.log('!!!', list.tail.prev);
 
-console.log(list.tail, '\n');
-console.log(list.toArray());
-console.log(list.toString());
+// console.log(list.tail, '\n');
+// console.log(list.toArray());
+// console.log(list.toString());
+module.exports = LinkedList;
