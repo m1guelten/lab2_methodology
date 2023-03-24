@@ -167,6 +167,34 @@ class LinkedList {
     this.tail = null;
   }
 
+  findFirst(value) {
+    if (!this.head) {
+      return null;
+    }
+    let currentNode = this.head;
+    while (currentNode) {
+      if (value !== undefined && currentNode.value === value) {
+        return currentNode.numb;
+      }
+      currentNode = currentNode.next;
+    }
+    return -1;
+  }
+
+  findLast(value) {
+    if (!this.head) {
+      return null;
+    }
+    let currentNode = this.tail;
+    while (currentNode) {
+      if (value !== undefined && currentNode.value === value) {
+        return currentNode.numb;
+      }
+      currentNode = currentNode.prev;
+    }
+    return -1;
+  }
+
   toArray() {
     const nodes = [];
     let currentNode = this.head;

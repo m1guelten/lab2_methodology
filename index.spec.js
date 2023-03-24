@@ -111,10 +111,26 @@ describe('Linked List', () => {
     expect(list.reverse().toString()).toBe('d,c,b,a');
   });
 
-  test('clear', () => {
+  test('Clear', () => {
     let list = init();
     list.clear();
     expect(list.head).toBe(null);
     expect(list.tail).toBe(null);
+  });
+
+  test('FindFirst', () => {
+    let list = init();
+    list.append('b').append('e');
+    expect(list.toString()).toBe('a,b,c,d,b,e');
+    expect(list.findFirst('b')).toBe(1);
+    expect(list.findFirst('r')).toBe(-1);
+  });
+
+  test('FindLast', () => {
+    let list = init();
+    list.append('b').append('e');
+    expect(list.toString()).toBe('a,b,c,d,b,e');
+    expect(list.findLast('b')).toBe(4);
+    expect(list.findLast('r')).toBe(-1);
   });
 });
