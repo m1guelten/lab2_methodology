@@ -70,4 +70,54 @@ describe('Linked List', () => {
     expect(list.delete(5)).toBe(null);
     expect(list.delete(-5)).toBe(null);
   });
+
+  test('DeleteAll head', () => {
+    let list = init();
+    expect(list.deleteAll('a').toString()).toBe('a');
+    expect(list.toString()).toBe('b,c,d');
+    expect(list.head.value).toBe('b');
+    expect(list.tail.value).toBe('d');
+  });
+
+  test('DeleteAll tail', () => {
+    let list = init();
+    expect(list.deleteAll('d').toString()).toBe('d');
+    expect(list.toString()).toBe('a,b,c');
+    expect(list.head.value).toBe('a');
+    expect(list.tail.value).toBe('c');
+  });
+
+  test('DeleteAll middle', () => {
+    let list = init();
+    list.append('b').append('e');
+    expect(list.toString()).toBe('a,b,c,d,b,e');
+    expect(list.deleteAll('b').toString()).toBe('b');
+    expect(list.toString()).toBe('a,c,d,e');
+
+    expect(list.deleteAll('c').toString()).toBe('c');
+    expect(list.toString()).toBe('a,d,e');
+    expect(list.head.value).toBe('a');
+    expect(list.tail.value).toBe('e');
+  });
+
+  test('DeleteAll error', () => {
+    let list = init();
+    expect(list.deleteAll('f')).toBe(null);
+    expect(list.deleteAll(-5)).toBe(null);
+  });
+  // test('DeleteAll tail', () => {
+  //   let list = init();
+  //   expect(list.delete('d')).toBe('d');
+  //   expect(list.toString()).toBe('a,b,c');
+  //   expect(list.head.value).toBe('a');
+  //   expect(list.tail.value).toBe('c');
+  // });
+
+  // test('DeleteAll middle', () => {
+  //   let list = init();
+  //   expect(list.delete('b')).toBe('b');
+  //   expect(list.toString()).toBe('a,c,d');
+  //   expect(list.head.value).toBe('a');
+  //   expect(list.tail.value).toBe('d');
+  // });
 });
