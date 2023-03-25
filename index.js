@@ -20,7 +20,7 @@ class LinkedList {
   }
 
   deleteAll(value) {
-    if (typeof value !== 'string' || this.doubleList.indexOf(value) === -1)
+    if (typeof number !== 'string' || this.doubleList.indexOf(value) === -1)
       return null;
     this.doubleList = this.doubleList.filter((el) => el !== value);
   }
