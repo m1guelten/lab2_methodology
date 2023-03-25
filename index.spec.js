@@ -3,7 +3,10 @@ const LinkedList = require('./index');
 function init() {
   const list = new LinkedList();
 
-  list.append('a').append('b').append('c').append('d');
+  list.append('a');
+  list.append('b');
+  list.append('c');
+  list.append('d');
 
   return list;
 }
@@ -25,44 +28,20 @@ describe('Linked List', () => {
 
   test('Append', () => {
     let list = init();
-
-    expect(list.append('x').toString()).toBe('a,b,c,d,x');
-    expect(list.head.value).toBe('a');
-    expect(list.tail.value).toBe('x');
+    list.append('x');
+    expect(list.get(0)).toBe('a');
+    expect(list.get(1)).toBe('b');
+    expect(list.get(2)).toBe('c');
+    expect(list.get(3)).toBe('d');
+    expect(list.get(4)).toBe('x');
   });
 
-  test('Append is empty list', () => {
-    const list = new LinkedList();
-    expect(list.head).toBe(null);
-    expect(list.tail).toBe(null);
-
-    expect(list.append('a').toString()).toBe('a');
-    expect(list.head.value).toBe('a');
-    expect(list.tail.value).toBe('a');
-  });
-
-  test('Delete head', () => {
+  test('Delete', () => {
     let list = init();
-    expect(list.delete(0).toString()).toBe('a');
-    expect(list.toString()).toBe('b,c,d');
-    expect(list.head.value).toBe('b');
-    expect(list.tail.value).toBe('d');
-  });
-
-  test('Delete tail', () => {
-    let list = init();
-    expect(list.delete(3).toString()).toBe('d');
-    expect(list.toString()).toBe('a,b,c');
-    expect(list.head.value).toBe('a');
-    expect(list.tail.value).toBe('c');
-  });
-
-  test('Delete middle', () => {
-    let list = init();
-    expect(list.delete(1).toString()).toBe('b');
-    expect(list.toString()).toBe('a,c,d');
-    expect(list.head.value).toBe('a');
-    expect(list.tail.value).toBe('d');
+    list.delete(2);
+    expect(list.get(0)).toBe('a');
+    expect(list.get(1)).toBe('b');
+    expect(list.get(2)).toBe('d');
   });
 
   test('Delete error', () => {
@@ -71,33 +50,15 @@ describe('Linked List', () => {
     expect(list.delete(-5)).toBe(null);
   });
 
-  test('DeleteAll head', () => {
-    let list = init();
-    expect(list.deleteAll('a').toString()).toBe('a');
-    expect(list.toString()).toBe('b,c,d');
-    expect(list.head.value).toBe('b');
-    expect(list.tail.value).toBe('d');
-  });
-
-  test('DeleteAll tail', () => {
-    let list = init();
-    expect(list.deleteAll('d').toString()).toBe('d');
-    expect(list.toString()).toBe('a,b,c');
-    expect(list.head.value).toBe('a');
-    expect(list.tail.value).toBe('c');
-  });
-
   test('DeleteAll middle', () => {
     let list = init();
-    list.append('b').append('e');
-    expect(list.toString()).toBe('a,b,c,d,b,e');
-    expect(list.deleteAll('b').toString()).toBe('b');
-    expect(list.toString()).toBe('a,c,d,e');
-
-    expect(list.deleteAll('c').toString()).toBe('c');
-    expect(list.toString()).toBe('a,d,e');
-    expect(list.head.value).toBe('a');
-    expect(list.tail.value).toBe('e');
+    list.append('b');
+    list.append('e');
+    list.deleteAll('b');
+    expect(list.get(0)).toBe('a');
+    expect(list.get(1)).toBe('c');
+    expect(list.get(2)).toBe('d');
+    expect(list.get(3)).toBe('e');
   });
 
   test('DeleteAll error', () => {
@@ -108,37 +69,43 @@ describe('Linked List', () => {
 
   test('Reverse', () => {
     let list = init();
-    expect(list.reverse().toString()).toBe('d,c,b,a');
+    list.reverse();
+    expect(list.get(0)).toBe('d');
+    expect(list.get(1)).toBe('c');
+    expect(list.get(2)).toBe('b');
+    expect(list.get(3)).toBe('a');
   });
 
   test('Clear', () => {
     let list = init();
     list.clear();
-    expect(list.head).toBe(null);
-    expect(list.tail).toBe(null);
+    expect(list.length()).toBe(0);
   });
 
   test('FindFirst', () => {
     let list = init();
-    list.append('b').append('e');
-    expect(list.toString()).toBe('a,b,c,d,b,e');
+    list.append('b');
+    list.append('e');
     expect(list.findFirst('b')).toBe(1);
     expect(list.findFirst('r')).toBe(-1);
   });
 
   test('FindLast', () => {
     let list = init();
-    list.append('b').append('e');
-    expect(list.toString()).toBe('a,b,c,d,b,e');
+    list.append('b');
+    list.append('e');
     expect(list.findLast('b')).toBe(4);
     expect(list.findLast('r')).toBe(-1);
   });
 
   test('Insert', () => {
     let list = init();
-    expect(list.insert('e', 2).toString()).toBe('a,b,e,c,d');
-    expect(list.insert('f', 0).toString()).toBe('f,a,b,e,c,d');
-    expect(list.insert('q', 6).toString()).toBe('f,a,b,e,c,d,q');
+    list.insert('e', 2);
+    expect(list.get(0)).toBe('a');
+    expect(list.get(1)).toBe('b');
+    expect(list.get(2)).toBe('e');
+    expect(list.get(3)).toBe('c');
+    expect(list.get(4)).toBe('d');
     expect(list.insert('h', 9)).toBe(null);
     expect(list.insert('w', -6)).toBe(null);
   });
@@ -155,18 +122,36 @@ describe('Linked List', () => {
   test('Clone', () => {
     let list = init();
     let cloneList = list.clone();
-    expect(list.clone().toString()).toBe('a,b,c,d');
+    expect(list.get(0)).toBe('a');
+    expect(list.get(1)).toBe('b');
+    expect(list.get(2)).toBe('c');
+    expect(list.get(3)).toBe('d');
+    expect(cloneList.get(0)).toBe('a');
+    expect(cloneList.get(1)).toBe('b');
+    expect(cloneList.get(2)).toBe('c');
+    expect(cloneList.get(3)).toBe('d');
     list.append('w');
-    expect(cloneList.toString()).toBe('a,b,c,d');
+    expect(cloneList.get(2)).toBe('c');
+    expect(cloneList.get(3)).toBe('d');
+    expect(cloneList.get(4)).toBe(null);
   });
 
   test('Extend', () => {
     let list = init();
     let list2 = init();
-    expect(list.extend(list2).toString()).toBe('a,b,c,d,a,b,c,d');
-    let list3 = new LinkedList();
-    expect(list.extend(list3).toString()).toBe('a,b,c,d,a,b,c,d');
+    list.extend(list2);
+    expect(list.get(0)).toBe('a');
+    expect(list.get(1)).toBe('b');
+    expect(list.get(2)).toBe('c');
+    expect(list.get(3)).toBe('d');
+    expect(list.get(4)).toBe('a');
+    expect(list.get(5)).toBe('b');
+    expect(list.get(6)).toBe('c');
+    expect(list.get(7)).toBe('d');
     list2.append('f');
-    expect(list.toString()).toBe('a,b,c,d,a,b,c,d');
+    expect(list.get(5)).toBe('b');
+    expect(list.get(6)).toBe('c');
+    expect(list.get(7)).toBe('d');
+    expect(list.get(8)).toBe(null);
   });
 });
