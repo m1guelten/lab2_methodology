@@ -195,6 +195,50 @@ class LinkedList {
     return -1;
   }
 
+  insert(value, number) {
+    const newNode = new linkedListNode(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+      return this;
+    }
+    if (number === this.length()) {
+      this.append(value);
+      return this;
+    }
+    if (number < 0 || number > this.length()) return null;
+
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.numb === number) {
+        number === 0
+          ? (this.head = newNode)
+          : (currentNode.prev.next = newNode);
+        newNode.prev = number === 0 ? null : currentNode.prev;
+        newNode.next = currentNode;
+        currentNode.prev = newNode;
+      }
+      currentNode = currentNode.next;
+    }
+
+    currentNode = this.head;
+    let count = 0;
+    while (currentNode) {
+      currentNode.numb = count++;
+      currentNode = currentNode.next;
+    }
+    return this;
+  }
+
+  get(number) {
+    if (number < 0 || number > this.length() || !this.head) return null;
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.numb === number) return currentNode;
+      currentNode = currentNode.next;
+    }
+  }
+
   toArray() {
     const nodes = [];
     let currentNode = this.head;

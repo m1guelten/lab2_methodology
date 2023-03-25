@@ -133,4 +133,22 @@ describe('Linked List', () => {
     expect(list.findLast('b')).toBe(4);
     expect(list.findLast('r')).toBe(-1);
   });
+
+  test('Insert', () => {
+    let list = init();
+    expect(list.insert('e', 2).toString()).toBe('a,b,e,c,d');
+    expect(list.insert('f', 0).toString()).toBe('f,a,b,e,c,d');
+    expect(list.insert('q', 6).toString()).toBe('f,a,b,e,c,d,q');
+    expect(list.insert('h', 9)).toBe(null);
+    expect(list.insert('w', -6)).toBe(null);
+  });
+
+  test('Get', () => {
+    let list = init();
+    expect(list.get(0).toString()).toBe('a');
+    expect(list.get(1).toString()).toBe('b');
+    expect(list.get(3).toString()).toBe('d');
+    expect(list.get(-3)).toBe(null);
+    expect(list.get(19)).toBe(null);
+  });
 });
