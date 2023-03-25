@@ -151,4 +151,22 @@ describe('Linked List', () => {
     expect(list.get(-3)).toBe(null);
     expect(list.get(19)).toBe(null);
   });
+
+  test('Clone', () => {
+    let list = init();
+    let cloneList = list.clone();
+    expect(list.clone().toString()).toBe('a,b,c,d');
+    list.append('w');
+    expect(cloneList.toString()).toBe('a,b,c,d');
+  });
+
+  test('Extend', () => {
+    let list = init();
+    let list2 = init();
+    expect(list.extend(list2).toString()).toBe('a,b,c,d,a,b,c,d');
+    let list3 = new LinkedList();
+    expect(list.extend(list3).toString()).toBe('a,b,c,d,a,b,c,d');
+    list2.append('f');
+    expect(list.toString()).toBe('a,b,c,d,a,b,c,d');
+  });
 });

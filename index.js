@@ -237,6 +237,28 @@ class LinkedList {
       if (currentNode.numb === number) return currentNode;
       currentNode = currentNode.next;
     }
+    return null;
+  }
+
+  clone() {
+    if (!this.head) return null;
+    let cloneList = new LinkedList();
+    let currentNode = this.head;
+    while (currentNode) {
+      cloneList.append(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return cloneList;
+  }
+
+  extend(listAdd) {
+    if (!listAdd.head) return this;
+    let currentNode = listAdd.head;
+    while (currentNode) {
+      this.append(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return this;
   }
 
   toArray() {
